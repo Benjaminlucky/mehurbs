@@ -34,8 +34,8 @@ app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 const allowed = [
   process.env.FRONTEND_URL || "http://localhost:3000",
   "http://localhost:3000",
-  "http://localhost:3001",
-  "https://realestatecmsapp.netlify.app",
+  "https://mehurbs.com",
+  "https://mehurbs.netlify.app",
 ];
 
 app.use(
