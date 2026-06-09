@@ -4,7 +4,8 @@
  */
 
 export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://mehurbs-production.up.railway.app";
 
 if (typeof window !== "undefined") {
   console.log("[API] URL:", API_URL);
