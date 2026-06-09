@@ -8,7 +8,7 @@ async function connectDB() {
   if (connected) return;
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: process.env.DB_NAME || "naijarealty",
+      dbName: process.env.DB_NAME || "mehurbs",
     });
     connected = true;
     console.log("[DB] MongoDB connected");
