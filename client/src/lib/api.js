@@ -3,10 +3,9 @@
  * No global 401 handler — each component handles auth errors itself
  */
 
-export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://mehurbs-production.up.railway.app";
-
+export const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL || "https://mehurbs-production.up.railway.app"
+).replace(/\/$/, "");
 if (typeof window !== "undefined") {
   console.log("[API] URL:", API_URL);
 }
