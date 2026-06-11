@@ -207,11 +207,14 @@ function LogoUpload({ value, onChange }) {
     setUploading(true);
     try {
       const res = await mediaApi.upload(file, "logos");
-      if (res?.data?.file_path) {
-        const path = res.data.file_path;
-        const url = path.startsWith("http")
-          ? path
-          : `${API_URL}/uploads/${path.replace(/^uploads\//, "")}`;
+
+      // mediaApi.upload returns the raw JSON — check both shapes
+      const filePath = res?.data?.file_path || res?.file_path;
+
+      if (filePath) {
+        const url = filePath.startsWith("http")
+          ? filePath
+          : `${API_URL}/uploads/${filePath.replace(/^uploads\//, "")}`;
         onChange(url);
         toast.success("Logo uploaded");
       } else {
@@ -408,15 +411,18 @@ function FaviconUpload({ value, onChange }) {
     setUploading(true);
     try {
       const res = await mediaApi.upload(file, "logos");
-      if (res?.data?.file_path) {
-        const path = res.data.file_path;
-        const url = path.startsWith("http")
-          ? path
-          : `${API_URL}/uploads/${path.replace(/^uploads\//, "")}`;
+
+      // mediaApi.upload returns the raw JSON — check both shapes
+      const filePath = res?.data?.file_path || res?.file_path;
+
+      if (filePath) {
+        const url = filePath.startsWith("http")
+          ? filePath
+          : `${API_URL}/uploads/${filePath.replace(/^uploads\//, "")}`;
         onChange(url);
-        toast.success("Favicon uploaded");
+        toast.success("Logo uploaded");
       } else {
-        toast.error("Upload failed");
+        toast.error("Upload failed — no path returned");
       }
     } catch (err) {
       toast.error(err?.message || "Upload failed");
