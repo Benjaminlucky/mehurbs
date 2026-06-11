@@ -24,6 +24,11 @@ const authCtrl = require("./controllers/authController");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ── Trust proxy (required for Railway / any reverse-proxy host) ───
+// Without this, express-rate-limit throws ERR_ERL_UNEXPECTED_X_FORWARDED_FOR
+// and IP-based rate limiting is inaccurate.
+app.set("trust proxy", 1);
+
 // ── Connect DB ────────────────────────────────────────────────────
 connectDB();
 
@@ -64,8 +69,6 @@ app.use(
 );
 
 // ── Rate limiters ─────────────────────────────────────────────────
-// Renamed from "auth" to "generalLimiter" / "authLimiter" to avoid
-// confusion with the requireAuth middleware
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: process.env.NODE_ENV === "production" ? 500 : 2000,
