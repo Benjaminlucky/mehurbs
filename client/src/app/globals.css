@@ -579,7 +579,6 @@
     overflow: hidden;
   }
 
-  /* Lime glow radial instead of emerald */
   .hero-section::before {
     content: "";
     position: absolute;
@@ -590,7 +589,7 @@
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgb(178 255 112 / 0.12) 0%,
+      color-mix(in srgb, var(--color-primary) 12%, transparent) 0%,
       transparent 70%
     );
     pointer-events: none;
@@ -692,10 +691,10 @@
   font-family: Inter, sans-serif;
 }
 
-/* Focus ring uses lime */
+/* Focus ring uses primary color */
 .admin-input:focus {
   border-color: var(--color-primary, #b2ff70);
-  box-shadow: 0 0 0 3px rgb(178 255 112 / 0.2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #b2ff70) 20%, transparent);
 }
 
 /* ── Textarea ── */
@@ -716,7 +715,7 @@
 
 .admin-textarea:focus {
   border-color: var(--color-primary, #b2ff70);
-  box-shadow: 0 0 0 3px rgb(178 255 112 / 0.2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #b2ff70) 20%, transparent);
 }
 
 /* ── 2-column grid ── */
