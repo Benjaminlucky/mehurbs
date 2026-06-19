@@ -398,7 +398,7 @@ function LogoUpload({ value, onChange }) {
           <input
             ref={ref}
             type="file"
-            accept="image/png,image/jpeg,image/svg+xml,image/webp"
+            accept=".svg,.png,.jpg,.jpeg,.webp,image/svg+xml,image/png,image/jpeg,image/webp"
             style={{ display: "none" }}
             onChange={(e) => {
               upload(e.target.files[0]);
@@ -419,7 +419,7 @@ function LogoUpload({ value, onChange }) {
           >
             Displayed in the navbar on a dark background.
             <br />
-            PNG with transparent background or SVG recommended.
+            SVG, PNG, JPG, or WebP accepted. SVG or PNG with transparent background recommended.
             <br />
             Max 5MB.
           </p>
