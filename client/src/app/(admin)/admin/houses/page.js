@@ -855,7 +855,7 @@ export default function AdminHousesPage() {
     setLoading(true);
     try {
       const params = { page, perPage: 12 };
-      if (search) params.q = search;
+      if (search) params.search = search;
       if (filterStatus) params.status = filterStatus;
       if (filterState) params.state = filterState;
       if (filterCategory) params.category = filterCategory;
@@ -897,7 +897,7 @@ export default function AdminHousesPage() {
   const handleUpdate = async (form) => {
     setSaving(true);
     try {
-      await housesApi.update(editHouse.id, form);
+      await housesApi.update(editHouse._id || editHouse.id, form);
       toast.success("Updated!");
       setEditHouse(null);
       fetchHouses();
@@ -910,7 +910,7 @@ export default function AdminHousesPage() {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await housesApi.delete(deleteHouse.id);
+      await housesApi.delete(deleteHouse._id || deleteHouse.id);
       toast.success("Deleted");
       setDeleteHouse(null);
       fetchHouses();
@@ -922,7 +922,7 @@ export default function AdminHousesPage() {
   };
   const toggleFeatured = async (house) => {
     try {
-      await housesApi.update(house.id, { ...house, featured: !house.featured });
+      await housesApi.update(house._id || house.id, { featured: !house.featured });
       fetchHouses();
     } catch {
       toast.error("Failed");

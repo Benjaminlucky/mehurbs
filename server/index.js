@@ -136,6 +136,22 @@ app.use((err, req, res, next) => {
       .status(413)
       .json({ success: false, message: "File too large (max 5MB)" });
 
+  // Mongoose CastError — invalid ObjectId or type mismatch
+  if (err.name === "CastError")
+    return res.status(400).json({ success: false, message: `Invalid value for field: ${err.path}` });
+
+  // Mongoose ValidationError — schema enum / required violations
+  if (err.name === "ValidationError") {
+    const message = Object.values(err.errors).map((e) => e.message).join("; ");
+    return res.status(400).json({ success: false, message });
+  }
+
+  // MongoDB duplicate key (unique index violation)
+  if (err.code === 11000) {
+    const field = Object.keys(err.keyPattern || {})[0] || "field";
+    return res.status(409).json({ success: false, message: `A record with this ${field} already exists` });
+  }
+
   console.error("[ERROR]", err.message);
   res.status(err.status || 500).json({
     success: false,
