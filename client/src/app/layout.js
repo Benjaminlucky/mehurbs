@@ -16,18 +16,33 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mehurbs.com";
+
 export const metadata = {
-  title: "Real Estate CMS",
-  description: "Premium Properties Across Nigeria",
-  // Declare locale and alternate links for international SEO.
-  // We serve English (Nigerian) only — the x-default and en-NG alternates
-  // both point to the same canonical URL which is correct for a single-locale site.
+  title: "Mehurbs — Premium Properties Across Nigeria",
+  description:
+    "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.",
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    canonical: SITE_URL,
     languages: {
-      "en-NG": process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-      "x-default": process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+      "en-NG": SITE_URL,
+      "x-default": SITE_URL,
     },
+  },
+  openGraph: {
+    title: "Mehurbs — Premium Properties Across Nigeria",
+    description:
+      "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.",
+    url: SITE_URL,
+    siteName: "Mehurbs",
+    locale: "en_NG",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mehurbs — Premium Properties Across Nigeria",
+    description:
+      "Discover premium lands and houses for sale across Nigeria. Browse verified listings and estate developments.",
   },
 };
 
@@ -121,14 +136,14 @@ export default async function RootLayout({ children }) {
     >
       <head>
         <style id="theme-vars" dangerouslySetInnerHTML={{ __html: themeCss }} />
-        {faviconUrl ? (
+        {/* When a custom favicon is saved in admin settings it overrides
+            the generated /icon and /apple-icon served by icon.js / apple-icon.js */}
+        {faviconUrl && (
           <>
             <link rel="icon" href={faviconUrl} />
             <link rel="shortcut icon" href={faviconUrl} />
             <link rel="apple-touch-icon" href={faviconUrl} />
           </>
-        ) : (
-          <link rel="icon" href="/favicon.ico" />
         )}
       </head>
       <body className="antialiased">
