@@ -320,7 +320,7 @@ function EnquiryForm({ house, settings }) {
       onSubmit={handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}
     >
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label style={labelStyle}>
             Name <span style={{ color: "var(--color-primary)" }}>*</span>
@@ -691,14 +691,7 @@ export default function HouseDetailClient({ house, settings, related }) {
           className="container-site"
           style={{ paddingTop: "2.5rem", paddingBottom: "4rem" }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 380px",
-              gap: "2.5rem",
-              alignItems: "start",
-            }}
-          >
+          <div className="detail-page-grid">
             {/* ── LEFT COLUMN ── */}
             <div>
               {/* ── Gallery ── */}

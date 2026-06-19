@@ -72,6 +72,7 @@ export default function AdminShell({ children, newEnquiries = 0 }) {
     >
       <AdminSidebar newEnquiries={newEnquiries} />
       <main
+        className="admin-main-content"
         style={{
           flex: 1,
           minWidth: 0,
